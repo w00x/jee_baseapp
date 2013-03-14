@@ -9,6 +9,8 @@ import java.util.Map;
 import org.blas.baseapp.domain.Post;
 import org.blas.baseapp.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,22 +30,6 @@ public class PostController {
     public String listarPosts(Map<String, Object> map) {
         List<Post> posts = postService.getListPost();
         map.put("posts", posts);
-        return "list";
-    }
-    
-    @RequestMapping(value="/login.htm", method = RequestMethod.GET)
-    public String login(ModelMap model) {
-        return "login";
-    }
-
-    @RequestMapping(value="/loginfailed.htm", method = RequestMethod.GET)
-    public String loginerror(ModelMap model) {
-        model.addAttribute("error", "true");
-        return "login";
-    }
-
-    @RequestMapping(value="/logout.htm", method = RequestMethod.GET)
-    public String logout(ModelMap model) {
-        return "login";
+        return "post/list";
     }
 }
